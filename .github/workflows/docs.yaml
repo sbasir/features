@@ -1,0 +1,29 @@
+name: "Generate Feature Documentation"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Documentation
+        uses: devcontainers/action@v1
+        with:
+          generate-docs: true
+          base-path-to-features: "./src"
+
+      - name: Commit and push docs
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add .
+            git commit -m "Update feature documentation"
+            git push
+          fi
