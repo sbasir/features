@@ -27,3 +27,5 @@ jobs:
             git commit -m "Update feature documentation"
             git push
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
