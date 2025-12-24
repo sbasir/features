@@ -1,0 +1,25 @@
+{
+  "id": "ssh-config",
+  "version": "1.0.0",
+  "name": "SSH Client Config",
+  "description": "Configures SSH client settings such as StrictHostKeyChecking, UserKnownHostsFile, and custom Host blocks.",
+  "documentationURL": "https://github.com/sbasir/features",
+  "options": {
+    "strictHostKeyChecking": {
+      "type": "string",
+      "default": "no",
+      "description": "Value for StrictHostKeyChecking (yes|no|ask)"
+    },
+    "userKnownHostsFile": {
+      "type": "string",
+      "default": "/dev/null",
+      "description": "Path for UserKnownHostsFile"
+    },
+    "addGithubBlock": {
+      "type": "boolean",
+      "default": true,
+      "description": "Add a dedicated Host github.com block with relaxed settings"
+    }
+  },
+  "installsAfter": []
+}
