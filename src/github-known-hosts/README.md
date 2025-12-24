@@ -1,7 +1,7 @@
 
 # GitHub Known Hosts (github-known-hosts)
 
-Adds GitHub SSH host keys (RSA, ECDSA, ED25519) to the remoteUser's ~/.ssh/known_hosts
+Adds GitHub SSH host keys (RSA, ECDSA, ED25519) to root and/or remoteUser known_hosts
 
 ## Example Usage
 
@@ -15,7 +15,8 @@ Adds GitHub SSH host keys (RSA, ECDSA, ED25519) to the remoteUser's ~/.ssh/known
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-
+| addForRoot | Add GitHub host keys to /root/.ssh/known_hosts | boolean | true |
+| addForRemoteUser | Add GitHub host keys to remoteUser's ~/.ssh/known_hosts | boolean | true |
 
 
 
