@@ -1,0 +1,9 @@
+{
+  "id": "github-known-hosts",
+  "version": "1.0.0",
+  "name": "GitHub Known Hosts",
+  "description": "Adds GitHub SSH host keys (RSA, ECDSA, ED25519) to the remoteUser's ~/.ssh/known_hosts",
+  "documentationURL": "https://github.com/sbasir/features",
+  "options": {},
+  "installsAfter": []
+}
