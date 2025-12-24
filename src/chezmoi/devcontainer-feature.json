@@ -1,6 +1,6 @@
 {
   "id": "chezmoi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "ChezMoi Bootstrap",
   "description": "Installs chezmoi and optionally initializes a dotfiles repo for the remoteUser.",
   "documentationURL": "https://github.com/sbasir/features",
