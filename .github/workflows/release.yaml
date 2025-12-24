@@ -10,9 +10,9 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
+      packages: write
       contents: write
       pull-requests: write
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -20,4 +20,6 @@ jobs:
         uses: devcontainers/action@v1
         with:
           publish-features: "true"
-          generate-docs: "true"
+          base-path-to-features: "./src"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
