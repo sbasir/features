@@ -1,0 +1,23 @@
+{
+  "id": "chezmoi",
+  "version": "1.0.0",
+  "name": "ChezMoi Bootstrap",
+  "description": "Installs chezmoi and optionally initializes a dotfiles repo for the remoteUser.",
+  "documentationURL": "https://github.com/sbasir/features",
+  "options": {
+    "repo": {
+      "type": "string",
+      "default": "",
+      "description": "Optional chezmoi repo to init (e.g. 'user', 'user/repo', or full URL). If empty, init is skipped."
+    },
+    "apply": {
+      "type": "boolean",
+      "default": true,
+      "description": "Run 'chezmoi init --apply' instead of just 'init'."
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/git"
+  ]
+}
