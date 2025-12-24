@@ -34,24 +34,23 @@ fi
 
 # Normalize repo input
 # Cases:
-#   "sbasir"        → pass through (chezmoi expands automatically)
+#   "user"        → pass through (chezmoi expands automatically)
 #   "user/repo"     → convert to https://github.com/user/repo.git
 #   full URL        → use as-is
-
 if printf "%s" "$REPO" | grep -qE '^https?://'; then
-  # Full URL provided
   REPO_URL="$REPO"
-
 elif printf "%s" "$REPO" | grep -q '/'; then
-  # user/repo form
   REPO_URL="https://github.com/$REPO.git"
-
 else
-  # Single token (e.g., "sbasir") → let chezmoi handle it
   REPO_URL="$REPO"
 fi
 
 echo "[chezmoi] Initializing repo: $REPO_URL"
+
+# Force GitHub SSH → HTTPS rewrite (critical fix)
+su "$TARGET_USER" -c "
+  git config --global url.\"https://github.com/\".insteadOf \"git@github.com:\"
+"
 
 INIT_CMD="$CHEZMOI_BIN init"
 [ "$APPLY" = "true" ] && INIT_CMD="$INIT_CMD --apply"
