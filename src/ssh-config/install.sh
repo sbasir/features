@@ -1,11 +1,9 @@
 #!/bin/sh
 set -e
 
-# Ensure SSH client exists
 apt-get update -y
 apt-get install -y --no-install-recommends openssh-client
 
-# Resolve target user
 TARGET_USER="${USERNAME:-vscode}"
 USER_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
 
@@ -17,21 +15,30 @@ fi
 mkdir -p "$USER_HOME/.ssh"
 CONFIG_FILE="$USER_HOME/.ssh/config"
 
-# Read feature options
-STRICT="${STRICTHOSTKEYCHECKING:-no}"
-KNOWN="${USERKNOWNHOSTSFILE:-/dev/null}"
+# Read options
+STRICT="${STRICTHOSTKEYCHECKING:-}"
+USER_KNOWN="${USERKNOWNHOSTSFILE:-}"
 ADD_GH="${ADDGITHUBBLOCK:-true}"
+
+# Determine default known_hosts path
+if [ -z "$USER_KNOWN" ]; then
+  USER_KNOWN="$USER_HOME/.ssh/known_hosts"
+fi
 
 echo "Configuring SSH client for $TARGET_USER..."
 
-# Global Host * block
-cat <<EOF >>"$CONFIG_FILE"
-Host *
-    StrictHostKeyChecking $STRICT
-    UserKnownHostsFile $KNOWN
-EOF
+{
+  echo "Host *"
 
-# Optional GitHub block
+  if [ -n "$STRICT" ]; then
+    echo "    StrictHostKeyChecking $STRICT"
+  fi
+
+  if [ -n "$USER_KNOWN" ]; then
+    echo "    UserKnownHostsFile $USER_KNOWN"
+  fi
+} >>"$CONFIG_FILE"
+
 if [ "$ADD_GH" = "true" ]; then
   cat <<EOF >>"$CONFIG_FILE"
 
@@ -41,7 +48,6 @@ Host github.com
 EOF
 fi
 
-# Permissions
 chown -R "$TARGET_USER":"$TARGET_USER" "$USER_HOME/.ssh"
 chmod 600 "$CONFIG_FILE"
 

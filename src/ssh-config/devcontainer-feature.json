@@ -7,12 +7,12 @@
   "options": {
     "strictHostKeyChecking": {
       "type": "string",
-      "default": "no",
+      "default": "yes",
       "description": "Value for StrictHostKeyChecking (yes|no|ask)"
     },
     "userKnownHostsFile": {
       "type": "string",
-      "default": "/dev/null",
+      "default": "",
       "description": "Path for UserKnownHostsFile"
     },
     "addGithubBlock": {
