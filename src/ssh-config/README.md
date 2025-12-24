@@ -15,8 +15,8 @@ Configures SSH client settings such as StrictHostKeyChecking, UserKnownHostsFile
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| strictHostKeyChecking | Value for StrictHostKeyChecking (yes|no|ask) | string | no |
-| userKnownHostsFile | Path for UserKnownHostsFile | string | /dev/null |
+| strictHostKeyChecking | Value for StrictHostKeyChecking (yes|no|ask) | string | yes |
+| userKnownHostsFile | Path for UserKnownHostsFile | string | - |
 | addGithubBlock | Add a dedicated Host github.com block with relaxed settings | boolean | true |
 
 
